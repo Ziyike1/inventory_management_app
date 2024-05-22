@@ -1,5 +1,7 @@
+基于Python的出入库管理软件
+
 1. 简介
-该软件旨在实现对产品的进货、出货和库存的自动统计与管理，并生成每月及每年的使用统计表。软件将使用VBA进行界面和逻辑控制，数据库使用MySQL或SQLite进行数据存储。
+该软件旨在实现对产品的进货、出货和库存的自动统计与管理，并生成每月及每年的使用统计表。软件将使用Python进行界面和逻辑控制，数据库使用MySQL或SQLite进行数据存储。
 
 2. 功能需求
 2.1 初期设置
@@ -23,7 +25,7 @@
 3.2 软件需求
 操作系统：Windows
 数据库：MySQL 或 SQLite
-开发环境：Microsoft Excel VBA
+开发环境：Python 3.9
 
 4. 用户界面需求
 4.1 主界面
@@ -59,6 +61,7 @@
 | Quantity | INT | 数量 |
 | PurchaseDate | DATE | 进货日期 |
 | Supplier | VARCHAR(255) | 供应商 |
+
 5.1.3 出货表 (SalesRecords)
 | 字段名 | 类型 | 描述 |
 | RecordID | INT | 记录编号 |
