@@ -9,5 +9,18 @@ def index():
     products = Product.query.all()
     return render_template('index.html', products=products)
 
+@current_app.route('/product', methods=['GET', 'POST'])
+def product():
+    if request.method == 'POST':
+        name = request.form['name']
+        specification = request.form['specification']
+        unit = request.form['unit']
+        product = Product(name=name, specification=specification, unit=unit)
+        db.session.add(product)
+        db.session.commit()
+        flash('New product added successfully!')
+        return redirect(url_for('index'))
+    return render_template('product.html')
+
 
 
