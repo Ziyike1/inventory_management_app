@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+  <h1>Product List</h1>
+  <ul>
+    {% for product in products %}
+      <li>{{ product.name }} - {{ product.specification }} - {{ product.unit }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
