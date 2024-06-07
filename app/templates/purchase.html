@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Record Purchase{% endblock %}
+{% block content %}
+  <h1>Record Purchase</h1>
+  <form method="POST">
+    <div class="form-group">
+      <label for="product_id">Product ID</label>
+      <input type="number" class="form-control" id="product_id" name="product_id" required>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="form-control" id="quantity" name="quantity" required>
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" class="form-control" id="date" name="date" required>
+    </div>
+    <div class="form-group">
+      <label for="supplier">Supplier</label>
+      <input type="text" class="form-control" id="supplier" name="supplier" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}
