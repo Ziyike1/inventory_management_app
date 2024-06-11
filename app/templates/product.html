@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
-{% block title %}Add Product{% endblock %}
+{% block title %}添加产品{% endblock %}
 {% block content %}
-  <h1>Add Product</h1>
+  <h1>添加产品</h1>
   <form method="POST">
     <div class="form-group">
-      <label for="name">Product Name</label>
+      <label for="name">产品名称</label>
       <input type="text" class="form-control" id="name" name="name" required>
     </div>
     <div class="form-group">
-      <label for="specification">Specification</label>
+      <label for="specification">规格</label>
       <input type="text" class="form-control" id="specification" name="specification" required>
     </div>
     <div class="form-group">
-      <label for="unit">Unit</label>
+      <label for="unit">单位</label>
       <input type="text" class="form-control" id="unit" name="unit" required>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">提交</button>
   </form>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-  <h1>Product List</h1>
+  <h1>产品列表</h1>
   <ul>
     {% for product in products %}
       <li>{{ product.name }} - {{ product.specification }} - {{ product.unit }}</li>
