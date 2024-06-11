@@ -1,10 +1,45 @@
 {% extends "layout.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}库存管理{% endblock %}
 {% block content %}
-  <h1>产品列表</h1>
+  <h1>库存管理</h1>
+
+  <h2>产品列表</h2>
   <ul>
     {% for product in products %}
-      <li>{{ product.name }} - {{ product.specification }} - {{ product.unit }}</li>
+      <li>
+        {{ product.name }} - {{ product.specification }} - {{ product.unit }}
+        <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm">删除</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>采购记录</h2>
+  <ul>
+    {% for purchase in purchases %}
+      <li>
+        {{ purchase.product_id }} - {{ purchase.quantity }} - {{ purchase.date }} - {{ purchase.supplier }}
+        <form action="{{ url_for('delete_purchase', purchase_id=purchase.id) }}" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm">删除</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>销售记录</h2>
+  <ul>
+    {% for sale in sales %}
+      <li>
+        {{ sale.product_id }} - {{ sale.quantity }} - {{ sale.date }} - {{ sale.destination }}
+        <form action="{{ url_for('delete_sale', sale_id=sale.id) }}" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm">删除</button>
+        </form>
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}
+
+
+
+
