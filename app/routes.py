@@ -9,6 +9,7 @@ def index():
     products = Product.query.all()
     return render_template('index.html', products=products)
 
+
 @current_app.route('/product', methods=['GET', 'POST'])
 def product():
     if request.method == 'POST':
@@ -51,4 +52,3 @@ def sale():
         flash('Sale record added successfully!')
         return redirect(url_for('index'))
     return render_template('sale.html')
-
