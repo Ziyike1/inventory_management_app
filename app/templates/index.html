@@ -7,7 +7,7 @@
   <ul>
     {% for product in products %}
       <li>
-        {{ product.name }} - {{ product.specification }} - {{ product.unit }}
+        {{ product.name }} - {{ product.specification }} - {{ product.unit }} - 初始库存: {{ product.initial_stock }}
         <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
           <button type="submit" class="btn btn-danger btn-sm">删除</button>
         </form>
