@@ -6,6 +6,7 @@ class Product(db.Model):
     name = db.Column(db.String(64), index=True, unique=True)
     specification = db.Column(db.String(120))
     unit = db.Column(db.String(20))
+    initial_stock = db.Column(db.Integer, default=0)
 
 
 class Purchase(db.Model):
