@@ -1,20 +1,24 @@
 {% extends "layout.html" %}
-{% block title %}添加产品{% endblock %}
 {% block content %}
   <h1>添加产品</h1>
-  <form method="POST">
-    <div class="form-group">
-      <label for="name">产品名称</label>
-      <input type="text" class="form-control" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-      <label for="specification">规格</label>
-      <input type="text" class="form-control" id="specification" name="specification" required>
-    </div>
-    <div class="form-group">
-      <label for="unit">单位</label>
-      <input type="text" class="form-control" id="unit" name="unit" required>
-    </div>
-    <button type="submit" class="btn btn-primary">提交</button>
+  <form method="POST" action="">
+    <p>
+      <label for="name">产品名称</label><br>
+      <input type="text" id="name" name="name" size="32" required>
+    </p>
+    <p>
+      <label for="specification">规格</label><br>
+      <input type="text" id="specification" name="specification" size="64" required>
+    </p>
+    <p>
+      <label for="unit">单位</label><br>
+      <input type="text" id="unit" name="unit" size="16" required>
+    </p>
+    <p>
+      <label for="initial_stock">期初库存数量</label><br>
+      <input type="number" id="initial_stock" name="initial_stock" size="8" required>
+    </p>
+    <p><input type="submit" value="提交"></p>
   </form>
 {% endblock %}
+
