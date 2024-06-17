@@ -40,7 +40,7 @@ def purchase():
         purchase = Purchase(product_id=product_id, quantity=quantity, date=date, supplier=supplier)
         db.session.add(purchase)
         db.session.commit()
-        flash('Purchase record added successfully!')
+        flash('采购记录添加成功!')
         return redirect(url_for('index'))
     return render_template('purchase.html')
 
@@ -50,12 +50,13 @@ def sale():
     if request.method == 'POST':
         product_id = request.form['product_id']
         quantity = request.form['quantity']
-        date = request.form['date']
+        date_str = request.form['date']
+        date = datetime.strptime(date_str, '%Y-%m-%d').date()
         destination = request.form['destination']
         sale = Sale(product_id=product_id, quantity=quantity, date=date, destination=destination)
         db.session.add(sale)
         db.session.commit()
-        flash('出售记录添加成功')
+        flash('安装记录添加成功')
         return redirect(url_for('index'))
     return render_template('sale.html')
 
