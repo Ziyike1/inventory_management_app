@@ -1,24 +1,24 @@
 {% extends "layout.html" %}
-{% block title %}记录销售{% endblock %}
+{% block title %}记录安装{% endblock %}
 {% block content %}
-  <h1>记录销售</h1>
+  <h1>记录安装</h1>
   <form method="POST">
-    <div class="form-group">
+    <p>
       <label for="product_id">产品ID</label>
-      <input type="number" class="form-control" id="product_id" name="product_id" required>
-    </div>
-    <div class="form-group">
+      <input type="number" id="product_id" name="product_id" size="32" min="0" required>
+    </p>
+    <p>
       <label for="quantity">产品数量</label>
-      <input type="number" class="form-control" id="quantity" name="quantity" required>
-    </div>
-    <div class="form-group">
+      <input type="number" id="quantity" name="quantity" size="32" min="0" required>
+    </p>
+    <p>
       <label for="date">日期</label>
-      <input type="date" class="form-control" id="date" name="date" required>
-    </div>
-    <div class="form-group">
-      <label for="destination">收货人</label>
-      <input type="text" class="form-control" id="destination" name="destination" required>
-    </div>
-    <button type="submit" class="btn btn-primary">提交</button>
+      <input type="date" id="date" name="date" size="32" required>
+    </p>
+    <p>
+      <label for="supplier">收货人</label>
+      <input type="text" id="supplier" name="supplier" size="32" required>
+    </p>
+    <p><button type="submit" class="btn btn-primary">提交</button></p>
   </form>
 {% endblock %}

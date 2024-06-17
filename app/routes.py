@@ -20,7 +20,8 @@ def product():
         specification = request.form['specification']
         unit = request.form['unit']
         initial_stock = request.form['initial_stock']
-        product = Product(name=name, specification=specification, unit=unit, initial_stock=initial_stock)
+        id = request.form['id']
+        product = Product(id=id, name=name, specification=specification, unit=unit, initial_stock=initial_stock)
         db.session.add(product)
         db.session.commit()
         flash('新产品添加成功')
