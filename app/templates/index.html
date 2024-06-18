@@ -1,44 +1,57 @@
 {% extends "layout.html" %}
 {% block title %}库存管理{% endblock %}
 {% block content %}
-  <h1>库存管理</h1>
 
-  <h2>产品列表</h2>
-  <ul>
-    {% for product in products %}
-      <li>
-        {{ product.id }} - {{ product.name }} - {{ product.specification }} - {{ product.unit }} - 初始库存: {{ product.initial_stock }}
-        <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
-          <button type="submit" class="btn btn-danger btn-sm">删除</button>
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="container">
+    <h1>库存管理</h1>
 
-  <h2>采购记录</h2>
-  <ul>
-    {% for purchase in purchases %}
-      <li>
-        {{ purchase.product_id }} - {{ purchase.quantity }} - {{ purchase.date }} - {{ purchase.supplier }}
-        <form action="{{ url_for('delete_purchase', purchase_id=purchase.id) }}" method="POST" style="display:inline;">
-          <button type="submit" class="btn btn-danger btn-sm">删除</button>
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
+    <h2>产品列表</h2>
+    <ul class="item-list">
+      {% for product in products %}
+        <li>
+          <div class="item-details">
+            <img src="{{ url_for('static', filename='images/product.png') }}" alt="Product Image">
+            {{ product.id }} - {{ product.name }} - {{ product.specification }} - {{ product.unit }} - 初始库存: {{ product.initial_stock }}
+          </div>
+          <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">删除</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
 
-  <h2>安装记录</h2>
-  <ul>
-    {% for sale in sales %}
-      <li>
-        {{ sale.product_id }} - {{ sale.quantity }} - {{ sale.date }} - {{ sale.destination }}
-        <form action="{{ url_for('delete_sale', sale_id=sale.id) }}" method="POST" style="display:inline;">
-          <button type="submit" class="btn btn-danger btn-sm">删除</button>
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
+    <h2>采购记录</h2>
+    <ul class="item-list">
+      {% for purchase in purchases %}
+        <li>
+          <div class="item-details">
+            <img src="{{ url_for('static', filename='images/product.png') }}" alt="Purchase Image">
+            {{ purchase.product_id }} - {{ purchase.quantity }} - {{ purchase.date }} - {{ purchase.supplier }}
+          </div>
+          <form action="{{ url_for('delete_purchase', purchase_id=purchase.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">删除</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <h2>安装记录</h2>
+    <ul class="item-list">
+      {% for sale in sales %}
+        <li>
+          <div class="item-details">
+            <img src="{{ url_for('static', filename='images/product.png') }}" alt="Sale Image">
+            {{ sale.product_id }} - {{ sale.quantity }} - {{ sale.date }} - {{ sale.destination }}
+          </div>
+          <form action="{{ url_for('delete_sale', sale_id=sale.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">删除</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
+
 
 
 
