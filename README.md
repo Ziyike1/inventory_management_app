@@ -54,26 +54,29 @@
 ### 5.1 数据表
 
 #### 5.1.1 产品表 (Products)
-| 字段名 | 类型 | 描述 |
-| --- | --- | --- |
-| ProductID | INT | 产品编号 |
-| ProductName | VARCHAR(255) | 产品名称 |
-| Specification | VARCHAR(255) | 规格 |
-| Unit | VARCHAR(50) | 单位 |
+| 字段名           | 类型 | 描述   |
+|---------------| --- |------|
+| ProductID     | INT | 产品编号 |
+| ProductName   | VARCHAR(255) | 产品名称 |
+| Specification | VARCHAR(255) | 规格   |
+| Unit          | VARCHAR(50) | 单位   |
+ | Initial_stock | VARCHAR(50) | 数量   |
 
 #### 5.1.2 进货表 (PurchaseRecords)
 | 字段名 | 类型 | 描述 |
 | --- | --- | --- |
 | RecordID | INT | 记录编号 |
+| ProductName   | VARCHAR(255) | 产品名称 |
 | ProductID | INT | 产品编号 |
 | Quantity | INT | 数量 |
 | PurchaseDate | DATE | 进货日期 |
 | Supplier | VARCHAR(255) | 供应商 |
 
-#### 5.1.3 出货表 (SalesRecords)
+#### 5.1.3 安装表 (SalesRecords)
 | 字段名 | 类型 | 描述 |
 | --- | --- | --- |
 | RecordID | INT | 记录编号 |
+| ProductName   | VARCHAR(255) | 产品名称 |
 | ProductID | INT | 产品编号 |
 | Quantity | INT | 数量 |
 | SalesDate | DATE | 出货日期 |
