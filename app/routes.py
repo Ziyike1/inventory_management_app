@@ -16,11 +16,11 @@ def index():
 @current_app.route('/product', methods=['GET', 'POST'])
 def product():
     if request.method == 'POST':
+        id = request.form['id']
         name = request.form['name']
         specification = request.form['specification']
         unit = request.form['unit']
         initial_stock = request.form['initial_stock']
-        id = request.form['id']
         product = Product(id=id, name=name, specification=specification, unit=unit, initial_stock=initial_stock)
         db.session.add(product)
         db.session.commit()
@@ -33,11 +33,12 @@ def product():
 def purchase():
     if request.method == 'POST':
         product_id = request.form['product_id']
+        name = request.form['purchase_name']
         quantity = request.form['quantity']
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
         supplier = request.form['supplier']
-        purchase = Purchase(product_id=product_id, quantity=quantity, date=date, supplier=supplier)
+        purchase = Purchase(product_id=product_id, name=name, quantity=quantity, date=date, supplier=supplier)
         db.session.add(purchase)
         db.session.commit()
         flash('采购记录添加成功!')

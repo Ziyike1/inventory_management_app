@@ -26,7 +26,7 @@
         <li>
           <div class="item-details">
             <img src="{{ url_for('static', filename='images/product.png') }}" alt="Purchase Image">
-            {{ purchase.product_id }} - {{ purchase.quantity }} - {{ purchase.date }} - {{ purchase.supplier }}
+            {{ purchase.purchase_name }} - {{ purchase.product_id }} - {{ purchase.quantity }} - {{ purchase.date }} - {{ purchase.supplier }}
           </div>
           <form action="{{ url_for('delete_purchase', purchase_id=purchase.id) }}" method="POST" style="display:inline;">
             <button type="submit" class="btn btn-danger btn-sm">删除</button>
