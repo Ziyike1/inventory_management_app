@@ -20,6 +20,7 @@ class Purchase(db.Model):
 
 class Sale(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64), index=True)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
     quantity = db.Column(db.Integer)
     date = db.Column(db.Date)

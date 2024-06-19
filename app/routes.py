@@ -50,11 +50,12 @@ def purchase():
 def sale():
     if request.method == 'POST':
         product_id = request.form['product_id']
+        name = request.form['sale_name']
         quantity = request.form['quantity']
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
         destination = request.form['destination']
-        sale = Sale(product_id=product_id, quantity=quantity, date=date, destination=destination)
+        sale = Sale(product_id=product_id, name=name, quantity=quantity, date=date, destination=destination)
         db.session.add(sale)
         db.session.commit()
         flash('安装记录添加成功')
