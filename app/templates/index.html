@@ -3,15 +3,13 @@
 {% block content %}
 
   <div class="container">
-    <h1>库存管理</h1>
-
-    <h2>产品列表</h2>
+    <h2>库存列表</h2>
     <ul class="item-list">
       {% for product in products %}
         <li>
           <div class="item-details">
             <img src="{{ url_for('static', filename='images/product.png') }}" alt="Product Image">
-            {{ product.id }} - 产品名称: {{ product.name }} - {{ product.specification }} - {{ product.unit }} - 初始库存: {{ product.initial_stock }}
+            产品ID: [{{ product.id }}] - 产品名称: [{{ product.name }}] - 规格 [{{ product.specification }}] - 单位 [{{ product.unit }}] - 初始库存: [{{ product.initial_stock }}]
           </div>
           <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
             <button type="submit" class="btn btn-danger btn-sm">删除</button>
@@ -20,13 +18,13 @@
       {% endfor %}
     </ul>
 
-    <h2>采购记录</h2>
+    <h2>入库记录</h2>
     <ul class="item-list">
       {% for purchase in purchases %}
         <li>
           <div class="item-details">
             <img src="{{ url_for('static', filename='images/product.png') }}" alt="Purchase Image">
-             {{ purchase.product_id }} - {{ purchase.purchase_name }} - {{ purchase.quantity }} - {{ purchase.date }} - {{ purchase.supplier }}
+             产品ID: [{{ purchase.product_id }}] - 产品名称: [{{ purchase.purchase_name }}] - 数量： [{{ purchase.quantity }}] - 日期： [{{ purchase.date }}] - 人员： [{{ purchase.supplier }}]
           </div>
           <form action="{{ url_for('delete_purchase', purchase_id=purchase.id) }}" method="POST" style="display:inline;">
             <button type="submit" class="btn btn-danger btn-sm">删除</button>
@@ -35,13 +33,13 @@
       {% endfor %}
     </ul>
 
-    <h2>安装记录</h2>
+    <h2>出库记录</h2>
     <ul class="item-list">
       {% for sale in sales %}
         <li>
           <div class="item-details">
             <img src="{{ url_for('static', filename='images/product.png') }}" alt="Sale Image">
-            {{ sale.product_id }} - {{ sale.sale_name }} - {{ sale.quantity }} - {{ sale.date }} - {{ sale.destination }}
+            产品ID: [{{ sale.product_id }}] - 产品名称: [{{ sale.sale_name }}] - 数量： [{{ sale.quantity }}] - 日期： [{{ sale.date }}] - 人员： [{{ sale.destination }}]
           </div>
           <form action="{{ url_for('delete_sale', sale_id=sale.id) }}" method="POST" style="display:inline;">
             <button type="submit" class="btn btn-danger btn-sm">删除</button>
