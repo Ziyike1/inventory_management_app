@@ -1,13 +1,18 @@
 {% extends "layout.html" %}
-{% block title %}记录采购{% endblock %}
+{% block title %}记录入库{% endblock %}
 {% block content %}
 
   <div class="container">
-    <h1>记录采购</h1>
+    <h1>记录入库</h1>
     <form method="POST">
       <p>
         <label for="product_id">产品ID</label><br>
-        <input type="number" id="product_id" name="product_id" size="32" min="0" required>
+          <select id="product_id" name="product_id">
+            <option value="">请选择产品ID</option>
+            {% for product in products %}
+              <option value="{{ product.id }}" data-name="{{ product.name }}">{{ product.id }}</option>
+            {% endfor %}
+          </select>
       </p>
       <p>
         <label for="purchase_name">产品名称</label><br>
@@ -22,11 +27,19 @@
         <input type="date" id="date" name="date" size="32" required>
       </p>
       <p>
-        <label for="supplier">供应商</label><br>
+        <label for="supplier">人员</label><br>
         <input type="text" id="supplier" name="supplier" size="32" required>
       </p>
-      <p><button type="submit" class="btn btn-primary">提交</button></p>
+      <p><button type="submit" class="nav-link btn-custom">提交</button></p>
+      <a class="nav-link btn-custom" href="{{ url_for('index') }}">返回</a>
     </form>
   </div>
+    <script>
+      document.getElementById('product_id').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var productName = selectedOption.getAttribute('data-name');
+        document.getElementById('purchase_name').value = productName;
+      });
+    </script>
 {% endblock %}
 

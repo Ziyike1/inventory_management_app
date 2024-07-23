@@ -10,12 +10,12 @@
   <body>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="nav-link btn-primary" href="{{ url_for('index') }}">期初库存</a>
-      <div class="navbar-links">
-        <a class="nav-link btn-primary" href="{{ url_for('product') }}">添加产品</a>
-        <a class="nav-link btn-primary" href="{{ url_for('purchase') }}">记录入库</a>
-        <a class="nav-link btn-primary" href="{{ url_for('sale') }}">记录出库</a>
-      </div>
+        <a id="toggleInventoryLink" class="nav-link btn-custom" href="#">查看库存</a>
+        <div class="navbar-links">
+          <a class="nav-link btn-custom" href="{{ url_for('product') }}">添加产品</a>
+          <a class="nav-link btn-custom" href="{{ url_for('purchase') }}">记录入库</a>
+          <a class="nav-link btn-custom" href="{{ url_for('sale') }}">记录出库</a>
+        </div>
       </nav>
       <div class="content">
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -28,5 +28,32 @@
         {% block content %}{% endblock %}
       </div>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const toggleInventoryLink = document.getElementById('toggleInventoryLink');
+        const inventoryList = document.getElementById('inventoryList');
+
+        toggleInventoryLink.addEventListener('click', function (event) {
+          event.preventDefault();
+          if (inventoryList.style.display === 'none') {
+            inventoryList.style.display = 'block';
+            toggleInventoryLink.textContent = '隐藏库存';
+          } else {
+            inventoryList.style.display = 'none';
+            toggleInventoryLink.textContent = '查看库存';
+          }
+        });
+
+        // 自动显示库存
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('show_inventory')) {
+          inventoryList.style.display = 'block';
+          toggleInventoryLink.textContent = '隐藏库存';
+        }
+
+      });
+    </script>
   </body>
 </html>
+
+
