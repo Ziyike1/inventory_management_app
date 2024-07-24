@@ -1,3 +1,4 @@
+import getpass
 import uuid
 
 from flask import render_template, flash, redirect, url_for, request, current_app
@@ -12,7 +13,8 @@ def index():
     products = Product.query.all()
     purchases = Purchase.query.all()
     sales = Sale.query.all()
-    return render_template('index.html', products=products, purchases=purchases, sales=sales)
+    current_user = getpass.getuser()
+    return render_template('index.html', products=products, purchases=purchases, sales=sales, current_time=datetime.now(), current_user=current_user)
 
 
 @current_app.route('/product', methods=['GET', 'POST'])
@@ -28,7 +30,8 @@ def product():
         db.session.commit()
         flash('新库存添加成功')
         return redirect(url_for('index', show_inventory=True))
-    return render_template('product.html')
+    current_user = getpass.getuser()
+    return render_template('product.html', current_time=datetime.now(), current_user=current_user)
 
 
 @current_app.route('/purchase', methods=['GET', 'POST'])
@@ -39,7 +42,7 @@ def purchase():
         quantity = request.form['quantity']
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
-        supplier = request.form['supplier']
+        supplier = request.form.get('supplier', None)
         purchase = Purchase(id=str(uuid.uuid4()), product_id=product_id, name=name, quantity=quantity, date=date, supplier=supplier)
         db.session.add(purchase)
 
@@ -50,7 +53,8 @@ def purchase():
         flash('入库记录添加成功!')
         return redirect(url_for('index', show_inventory=True))
     products = Product.query.all()
-    return render_template('purchase.html', products=products)
+    current_user = getpass.getuser()
+    return render_template('purchase.html', products=products, current_time=datetime.now(), current_user=current_user)
 
 
 @current_app.route('/sale', methods=['GET', 'POST'])
@@ -61,7 +65,7 @@ def sale():
         quantity = request.form['quantity']
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
-        destination = request.form['destination']
+        destination = request.form.get('destination', None)
         sale = Sale(id=str(uuid.uuid4()), product_id=product_id, name=name, quantity=quantity, date=date, destination=destination)
         db.session.add(sale)
 
@@ -72,7 +76,8 @@ def sale():
         flash('出库记录添加成功')
         return redirect(url_for('index',show_inventory=True))
     available_products = Product.query.filter(Product.initial_stock > 0).all()
-    return render_template('sale.html', available_products=available_products)
+    current_user = getpass.getuser()
+    return render_template('sale.html', available_products=available_products, current_time=datetime.now(), current_user=current_user)
 
 
 @current_app.route('/delete_product/<product_id>', methods=['POST'])
@@ -81,7 +86,7 @@ def delete_product(product_id):
     db.session.delete(product)
     db.session.commit()
     flash('产品删除成功!')
-    return redirect(url_for('index',show_inventory=True))
+    return redirect(url_for('index', show_inventory=True))
 
 
 @current_app.route('/delete_purchase/<purchase_id>', methods=['POST'])
@@ -90,7 +95,7 @@ def delete_purchase(purchase_id):
     db.session.delete(purchase)
     db.session.commit()
     flash('入库记录删除成功!')
-    return redirect(url_for('index',show_inventory=True))
+    return redirect(url_for('index', show_inventory=True))
 
 
 @current_app.route('/delete_sale/<sale_id>', methods=['POST'])
@@ -99,4 +104,4 @@ def delete_sale(sale_id):
     db.session.delete(sale)
     db.session.commit()
     flash('出库记录删除成功!')
-    return redirect(url_for('index',show_inventory=True))
+    return redirect(url_for('index', show_inventory=True))

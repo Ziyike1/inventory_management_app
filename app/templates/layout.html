@@ -10,13 +10,19 @@
   <body>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a id="toggleInventoryLink" class="nav-link btn-custom" href="#">查看库存</a>
+          <a id="toggleInventoryLink" class="nav-link btn-custom" href="#">查看库存</a>
         <div class="navbar-links">
           <a class="nav-link btn-custom" href="{{ url_for('product') }}">添加产品</a>
           <a class="nav-link btn-custom" href="{{ url_for('purchase') }}">记录入库</a>
           <a class="nav-link btn-custom" href="{{ url_for('sale') }}">记录出库</a>
         </div>
       </nav>
+
+      <div class="status-bar">
+        <span id="currentUser">当前用户: {{ current_user }}</span>
+        <span id="currentTime"></span>
+      </div>
+
       <div class="content">
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% if messages %}
@@ -52,6 +58,17 @@
         }
 
       });
+
+      function updateTime() {
+        var now = new Date();
+        var dateString = now.toLocaleDateString();
+        var timeString = now.toLocaleTimeString();
+        document.getElementById('currentTime').textContent = '系统时间: ' + dateString + ' ' + timeString;
+      }
+
+      setInterval(updateTime, 1000);
+      updateTime();
+
     </script>
   </body>
 </html>

@@ -149,5 +149,36 @@ input[type="submit"], .btn {
 /* 警告信息样式 */
 .alert {
   margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
 }
 
+.alert .close {
+  margin-left: 20px;
+  color: #ffffff;
+  text-shadow: none;
+  opacity: 0.6;
+}
+
+.alert .close:hover {
+  opacity: 1;
+}
+
+
+.status-bar {
+  background-color: #f8f9fa;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.status-bar span {
+  margin: 0 10px;
+  font-size: 14px;
+}
