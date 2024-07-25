@@ -5,6 +5,8 @@
   <div class="container">
     <h1>期初库存添加</h1>
     <form method="POST" action="">
+      <a class="nav-link btn-custom" href="{{ url_for('index') }}">返回</a>
+      <p></p>
       <p>
         <label for="id">产品ID</label><br>
         <input type="text" id="id" name="id" size="32" min="0" required>
@@ -26,7 +28,6 @@
         <input type="number" id="initial_stock" name="initial_stock" size="32" min="0" required>
       </p>
       <p><button type="submit" class="nav-link btn-custom">提交</button></p>
-      <a class="nav-link btn-custom" href="{{ url_for('index') }}">返回</a>
     </form>
   </div>
 {% endblock %}

@@ -34,6 +34,21 @@ h1, h2 {
   padding: 10px;
 }
 
+.form-control {
+  width: 300px;
+  margin-right: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
 .navbar-brand {
   font-size: 1.5em;
   color: #ffffff;
@@ -101,7 +116,7 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="date"] {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -181,4 +196,18 @@ input[type="submit"], .btn {
 .status-bar span {
   margin: 0 10px;
   font-size: 14px;
+}
+
+select {
+  width: 200px;
+  padding: 10px;
+  font-size: 10px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
 }

@@ -16,6 +16,10 @@
           <a class="nav-link btn-custom" href="{{ url_for('purchase') }}">记录入库</a>
           <a class="nav-link btn-custom" href="{{ url_for('sale') }}">记录出库</a>
         </div>
+        <form class="form-inline" id="searchForm">
+          <input class="form-control" type="search" placeholder="搜索" aria-label="搜索" id="searchInput">
+          <button class="nav-link btn-custom" type="submit">搜索</button>
+        </form>
       </nav>
 
       <div class="status-bar">
@@ -57,6 +61,25 @@
           toggleInventoryLink.textContent = '隐藏库存';
         }
 
+        searchForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          const query = searchInput.value.toLowerCase();
+          const items = document.querySelectorAll('.item-list li');
+          items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(query)) {
+              item.style.display = 'flex';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+
+          if (query === '') {
+            items.forEach(item => {
+              item.style.display = 'flex';
+            });
+          }
+        });
       });
 
       function updateTime() {
@@ -68,6 +91,14 @@
 
       setInterval(updateTime, 1000);
       updateTime();
+
+       // 自动隐藏消息
+        setTimeout(function() {
+          const alerts = document.querySelectorAll('.alert');
+          alerts.forEach(alert => {
+            alert.style.display = 'none';
+          });
+        }, 5000);
 
     </script>
   </body>
