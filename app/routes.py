@@ -23,9 +23,8 @@ def product():
         id = request.form['id']
         name = request.form['name']
         specification = request.form['specification']
-        unit = request.form['unit']
         initial_stock = request.form['initial_stock']
-        product = Product(id=id, name=name, specification=specification, unit=unit, initial_stock=initial_stock, current_stock=initial_stock)
+        product = Product(id=id, name=name, specification=specification, initial_stock=initial_stock, current_stock=initial_stock)
         db.session.add(product)
         db.session.commit()
         flash('新库存添加成功')
@@ -39,11 +38,14 @@ def purchase():
     if request.method == 'POST':
         product_id = request.form['product_id']
         name = request.form['purchase_name']
+        specification = request.form['specification']
         quantity = request.form['quantity']
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
         supplier = request.form.get('supplier', None)
-        purchase = Purchase(id=str(uuid.uuid4()), product_id=product_id, name=name, quantity=quantity, date=date, supplier=supplier)
+        things = request.form['things']
+        company = request.form['company']
+        purchase = Purchase(id=str(uuid.uuid4()), product_id=product_id, name=name, specification=specification, quantity=quantity, date=date, supplier=supplier, things=things, company=company)
         db.session.add(purchase)
 
         product = Product.query.get(product_id)
@@ -62,11 +64,14 @@ def sale():
     if request.method == 'POST':
         product_id = request.form['product_id']
         name = request.form['sale_name']
+        specification = request.form['specification']
         quantity = request.form['quantity']
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
-        destination = request.form.get('destination', None)
-        sale = Sale(id=str(uuid.uuid4()), product_id=product_id, name=name, quantity=quantity, date=date, destination=destination)
+        supplier = request.form.get('supplier', None)
+        things = request.form['things']
+        company = request.form['company']
+        sale = Sale(id=str(uuid.uuid4()), product_id=product_id, name=name, specification=specification, quantity=quantity, date=date, supplier=supplier, things=things, company=company)
         db.session.add(sale)
 
         product = Product.query.get(product_id)

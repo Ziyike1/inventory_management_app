@@ -9,7 +9,7 @@
           <li>
             <div class="item-details">
               <img src="{{ url_for('static', filename='images/product.png') }}" alt="Product Image">
-              产品ID: [{{ product.id }}] - 产品名称: [{{ product.name }}] - 规格 [{{ product.specification }}] - 单位 [{{ product.unit }}] - 初始库存: [{{ product.initial_stock }}] - 当前库存: [{{ product.current_stock }}]
+              产品ID: [{{ product.id }}] - 产品名称: [{{ product.name }}] - 规格 [{{ product.specification }}] - 初始库存: [{{ product.initial_stock }}] - 当前库存: [{{ product.current_stock }}]
             </div>
             <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;">
               <button type="submit" class="btn btn-danger btn-sm">删除</button>
@@ -21,10 +21,11 @@
       <h2>入库记录</h2>
       <ul class="item-list">
         {% for purchase in purchases %}
+          {% set product = (products|selectattr('id', 'equalto', purchase.product_id)|first) or {} %}
           <li>
             <div class="item-details">
               <img src="{{ url_for('static', filename='images/product.png') }}" alt="Purchase Image">
-              产品ID: [{{ purchase.product_id }}] - 产品名称: [{{ purchase.name }}] - 数量： [{{ purchase.quantity }}] - 日期： [{{ purchase.date }}] - 人员： [{{ purchase.supplier }}]
+              产品ID: [{{ purchase.product_id }}] - 产品名称: [{{ product.name | default('未知') }}] - 规格 [{{ product.specification | default('未知') }}] - 数量： [{{ purchase.quantity }}] - 日期： [{{ purchase.date }}] - 经手人： [{{ purchase.supplier }}] - 事项： [{{ purchase.things }}] - 往来单位： [{{ purchase.company }}]
             </div>
             <form action="{{ url_for('delete_purchase', purchase_id=purchase.id) }}" method="POST" style="display:inline;">
               <button type="submit" class="btn btn-danger btn-sm">删除</button>
@@ -36,10 +37,11 @@
       <h2>出库记录</h2>
       <ul class="item-list">
         {% for sale in sales %}
+          {% set product = (products|selectattr('id', 'equalto', sale.product_id)|first) or {} %}
           <li>
             <div class="item-details">
               <img src="{{ url_for('static', filename='images/product.png') }}" alt="Sale Image">
-              产品ID: [{{ sale.product_id }}] - 产品名称: [{{ sale.name }}] - 数量： [{{ sale.quantity }}] - 日期： [{{ sale.date }}] - 人员： [{{ sale.destination }}]
+              产品ID: [{{ sale.product_id }}] - 产品名称: [{{ product.name | default('未知') }}] - 规格 [{{ product.specification | default('未知') }}] - 数量： [{{ sale.quantity }}] - 日期： [{{ sale.date }}] - 经手人： [{{ sale.supplier }}] - 事项： [{{ sale.things }}] - 去向： [{{ sale.company }}]
             </div>
             <form action="{{ url_for('delete_sale', sale_id=sale.id) }}" method="POST" style="display:inline;">
               <button type="submit" class="btn btn-danger btn-sm">删除</button>
@@ -50,5 +52,7 @@
     </div>
   </div>
 {% endblock %}
+
+
 
 
