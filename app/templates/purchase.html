@@ -12,7 +12,7 @@
           <select id="product_id" name="product_id">
             <option value="">请选择产品ID</option>
             {% for product in products %}
-              <option value="{{ product.id }}" data-name="{{ product.name }}">{{ product.id }}</option>
+              <option value="{{ product.id }}" data-name="{{ product.name }}" data-specification="{{ product.specification }}">{{ product.id }}</option>
             {% endfor %}
           </select>
       </p>
@@ -57,7 +57,9 @@
       document.getElementById('product_id').addEventListener('change', function() {
         var selectedOption = this.options[this.selectedIndex];
         var productName = selectedOption.getAttribute('data-name');
+        var productSpecification = selectedOption.getAttribute('data-specification');
         document.getElementById('purchase_name').value = productName;
+        document.getElementById('specification').value = productSpecification;
       });
     </script>
 {% endblock %}
