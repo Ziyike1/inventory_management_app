@@ -37,23 +37,33 @@ def product():
 def purchase():
     if request.method == 'POST':
         product_id = request.form['product_id']
+        new_product_id = request.form.get('new_product_id')
         name = request.form['purchase_name']
         specification = request.form['specification']
-        quantity = request.form['quantity']
+        quantity = int(request.form['quantity'])
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
         supplier = request.form.get('supplier', None)
         things = request.form['things']
         company = request.form['company']
+
+        if new_product_id:
+            product_id = new_product_id
+            product = Product(id=product_id, name=name, specification=specification, initial_stock=quantity,
+                              current_stock=quantity)
+            db.session.add(product)
+        else:
+            product = Product.query.get(product_id)
+            product.current_stock = int(product.current_stock)
+            product.current_stock = int(product.current_stock) + quantity
+
         purchase = Purchase(id=str(uuid.uuid4()), product_id=product_id, name=name, specification=specification, quantity=quantity, date=date, supplier=supplier, things=things, company=company)
         db.session.add(purchase)
-
-        product = Product.query.get(product_id)
-        product.current_stock += int(quantity)
-
         db.session.commit()
+
         flash('入库记录添加成功!')
         return redirect(url_for('index', show_inventory=True))
+
     products = Product.query.all()
     current_user = getpass.getuser()
     return render_template('purchase.html', products=products, current_time=datetime.now(), current_user=current_user)
@@ -80,7 +90,7 @@ def sale():
         db.session.commit()
         flash('出库记录添加成功')
         return redirect(url_for('index',show_inventory=True))
-    available_products = Product.query.filter(Product.initial_stock > 0).all()
+    available_products = Product.query.filter(Product.current_stock > 0).all()
     current_user = getpass.getuser()
     return render_template('sale.html', available_products=available_products, current_time=datetime.now(), current_user=current_user)
 
