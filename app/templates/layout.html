@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a id="toggleInventoryLink" class="nav-link btn-custom" href="#">查看库存</a>
+          <a id="toggleInventoryLink" class="nav-link btn-custom" href="{{ url_for('index') }}">查看库存</a>
         <div class="navbar-links">
           <a class="nav-link btn-custom" href="{{ url_for('product') }}">添加产品</a>
           <a class="nav-link btn-custom" href="{{ url_for('purchase') }}">记录入库</a>
@@ -40,43 +40,25 @@
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const toggleInventoryLink = document.getElementById('toggleInventoryLink');
-        const inventoryList = document.getElementById('inventoryList');
-
-        toggleInventoryLink.addEventListener('click', function (event) {
-          event.preventDefault();
-          if (inventoryList.style.display === 'none') {
-            inventoryList.style.display = 'block';
-            toggleInventoryLink.textContent = '隐藏库存';
-          } else {
-            inventoryList.style.display = 'none';
-            toggleInventoryLink.textContent = '查看库存';
-          }
-        });
-
-        // 自动显示库存
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('show_inventory')) {
-          inventoryList.style.display = 'block';
-          toggleInventoryLink.textContent = '隐藏库存';
-        }
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
 
         searchForm.addEventListener('submit', function (event) {
           event.preventDefault();
           const query = searchInput.value.toLowerCase();
-          const items = document.querySelectorAll('.item-list li');
-          items.forEach(item => {
-            const text = item.textContent.toLowerCase();
+          const rows = document.querySelectorAll('tbody tr');
+          rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
             if (text.includes(query)) {
-              item.style.display = 'flex';
+              row.style.display = '';
             } else {
-              item.style.display = 'none';
+              row.style.display = 'none';
             }
-          });
+        });
 
           if (query === '') {
-            items.forEach(item => {
-              item.style.display = 'flex';
+            rows.forEach(row => {
+              row.style.display = '';
             });
           }
         });

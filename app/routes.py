@@ -28,7 +28,7 @@ def product():
         db.session.add(product)
         db.session.commit()
         flash('新库存添加成功')
-        return redirect(url_for('index', show_inventory=True))
+        return redirect(url_for('index'))
     current_user = getpass.getuser()
     return render_template('product.html', current_time=datetime.now(), current_user=current_user)
 
@@ -62,7 +62,7 @@ def purchase():
         db.session.commit()
 
         flash('入库记录添加成功!')
-        return redirect(url_for('index', show_inventory=True))
+        return redirect(url_for('index'))
 
     products = Product.query.all()
     current_user = getpass.getuser()
@@ -89,7 +89,7 @@ def sale():
 
         db.session.commit()
         flash('出库记录添加成功')
-        return redirect(url_for('index',show_inventory=True))
+        return redirect(url_for('index'))
     available_products = Product.query.filter(Product.current_stock > 0).all()
     current_user = getpass.getuser()
     return render_template('sale.html', available_products=available_products, current_time=datetime.now(), current_user=current_user)
@@ -101,7 +101,7 @@ def delete_product(product_id):
     db.session.delete(product)
     db.session.commit()
     flash('产品删除成功!')
-    return redirect(url_for('index', show_inventory=True))
+    return redirect(url_for('index'))
 
 
 @current_app.route('/delete_purchase/<purchase_id>', methods=['POST'])
@@ -110,7 +110,7 @@ def delete_purchase(purchase_id):
     db.session.delete(purchase)
     db.session.commit()
     flash('入库记录删除成功!')
-    return redirect(url_for('index', show_inventory=True))
+    return redirect(url_for('index'))
 
 
 @current_app.route('/delete_sale/<sale_id>', methods=['POST'])
@@ -119,4 +119,4 @@ def delete_sale(sale_id):
     db.session.delete(sale)
     db.session.commit()
     flash('出库记录删除成功!')
-    return redirect(url_for('index', show_inventory=True))
+    return redirect(url_for('index'))
