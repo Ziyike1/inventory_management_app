@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}修改出库{% endblock %}
+{% block content %}
+
+  <div class="container">
+    <h1>修改出库</h1>
+    <form method="POST">
+      <a class="nav-link btn-custom" href="{{ url_for('index') }}">返回</a>
+      <p></p>
+      <p>
+        <label for="sale_name">产品名称</label><br>
+        <input type="text" id="sale_name" name="sale_name" size="32" value="{{ sale.name }}" required>
+      </p>
+      <p>
+        <label for="specification">规格</label><br>
+        <input type="text" id="specification" name="specification" size="32" value="{{ sale.specification }}" required>
+      </p>
+      <p>
+        <label for="quantity">产品数量</label><br>
+        <input type="number" id="quantity" name="quantity" size="32" min="0" value="{{ sale.quantity }}" required>
+      </p>
+      <p>
+        <label for="date">日期</label><br>
+        <input type="date" id="date" name="date" size="32" value="{{ sale.date }}" required>
+      </p>
+      <p>
+        <label for="supplier">经手人</label><br>
+        <input type="text" id="supplier" name="supplier" size="32" value="{{ sale.supplier }}">
+      </p>
+      <p>
+        <label for="things">事项</label><br>
+          <select id="things" name="things" >
+            <option value="">请选择事项</option>
+            <option value="新购">新购</option>
+            <option value="返修">返修</option>
+            <option value="调用">调用</option>
+          </select>
+      </p>
+      <p>
+        <label for="company">去向</label><br>
+        <input type="text" id="company" name="company" size="32" value="{{ sale.company }}">
+      </p>
+      <p><button type="submit" class="nav-link btn-custom">提交</button></p>
+    </form>
+  </div>
+{% endblock %}

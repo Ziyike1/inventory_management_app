@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}修改产品信息{% endblock %}
+{% block content %}
+
+  <div class="container">
+    <h1>修改产品信息</h1>
+    <form action="{{ url_for('edit_product', product_id=product.id) }}" method="POST">
+      <a class="nav-link btn-custom" href="{{ url_for('index') }}">返回</a>
+      <p></p>
+      <p>
+        <label for="id">产品ID</label><br>
+        <input type="text" id="id" name="id" size="32" value="{{ product.id }}" required>
+      </p>
+      <p>
+        <label for="name">产品名称</label><br>
+        <input type="text" id="name" name="name" size="32" value="{{ product.name }}" required>
+      </p>
+      <p>
+        <label for="specification">规格</label><br>
+        <input type="text" id="specification" name="specification" size="32" value="{{ product.specification }}" required>
+      </p>
+      <p>
+        <label for="initial_stock">期初库存数量</label><br>
+        <input type="number" id="initial_stock" name="initial_stock" size="32" min="0" value="{{ product.initial_stock }}"  required>
+      </p>
+      <p>
+        <label for="current_stock">当前库存数量</label><br>
+        <input type="number" id="current_stock" name="current_stock" size="32" min="0" value="{{ product.current_stock }}" required>
+      </p>
+      <p><button type="submit" class="nav-link btn-custom">保存修改</button></p>
+    </form>
+  </div>
+{% endblock %}

@@ -238,8 +238,12 @@ select:focus {
 }
 
 .btn-sm {
-  height: 42px;
-  width: 35px;
-  padding: 5px 10px;
-  font-size: 0.875em;
+  height: 32.5px;
+  width: 48px;
+  padding: 1px 1px;
+  font-size: 1.2em;
+}
+
+.btn-black{
+  background-color: gray;
 }
