@@ -1,7 +1,9 @@
 import getpass
 import uuid
+import pandas as pd
+import os
 
-from flask import render_template, flash, redirect, url_for, request, current_app
+from flask import render_template, flash, redirect, url_for, request, current_app, send_file
 from app import db
 from app.models import Product, Purchase, Sale
 from datetime import datetime
@@ -177,3 +179,53 @@ def edit_sale(sale_id):
         return redirect(url_for('index'))
     return render_template('edit_sale.html', sale=sale, current_time=datetime.now(),
                            current_user=getpass.getuser())
+
+
+@current_app.route('/export')
+def export_data():
+    products = Product.query.all()
+    purchases = Purchase.query.all()
+    sales = Sale.query.all()
+
+    products_df = pd.DataFrame([{
+        '产品ID': product.id,
+        '产品名称': product.name,
+        '规格': product.specification,
+        '初始库存': product.initial_stock,
+        '当前库存': product.current_stock
+    } for product in products])
+
+    purchases_df = pd.DataFrame([{
+        '产品ID': purchase.product_id,
+        '产品名称': purchase.name,
+        '规格': purchase.specification,
+        '数量': purchase.quantity,
+        '日期': purchase.date,
+        '经手人': purchase.supplier,
+        '事项': purchase.things,
+        '往来单位': purchase.company
+    } for purchase in purchases])
+
+    sales_df = pd.DataFrame([{
+        '产品ID': sale.product_id,
+        '产品名称': sale.name,
+        '规格': sale.specification,
+        '数量': sale.quantity,
+        '日期': sale.date,
+        '经手人': sale.supplier,
+        '事项': sale.things,
+        '去向': sale.company
+    } for sale in sales])
+
+    file_path = os.path.join(current_app.root_path, 'static', 'data.xlsx')
+    with pd.ExcelWriter(file_path) as writer:
+        products_df.to_excel(writer, sheet_name='库存列表', index=False)
+        purchases_df.to_excel(writer, sheet_name='入库记录', index=False)
+        sales_df.to_excel(writer, sheet_name='出库记录', index=False)
+
+    return send_file(file_path, as_attachment=True, download_name='data.xlsx')
+
+
+@current_app.route('/import', methods=['POST'])
+def import_data():
+    return
