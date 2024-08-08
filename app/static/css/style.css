@@ -184,7 +184,7 @@ input[type="submit"], .btn {
   opacity: 1;
 }
 
-
+/* 状态栏样式 */
 .status-bar {
   background-color: #f8f9fa;
   padding: 10px;
@@ -212,6 +212,7 @@ select:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
 }
 
+/* 表格样式 */
 .custom-table {
   width: 100%;
   border-collapse: collapse;
