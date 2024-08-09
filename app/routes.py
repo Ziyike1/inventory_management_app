@@ -226,6 +226,70 @@ def export_data():
     return send_file(file_path, as_attachment=True, download_name='data.xlsx')
 
 
-@current_app.route('/import', methods=['POST'])
+@current_app.route('/import_data', methods=['GET', 'POST'])
 def import_data():
-    return
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('没有选择文件')
+            return redirect(url_for('import_data'))
+
+        file = request.files['file']
+
+        if file.filename == '':
+            flash('没有选择文件')
+            return redirect(url_for('import_data'))
+
+        if file and allowed_file(file.filename):
+            # 确保上传目录存在
+            uploads_dir = os.path.join(current_app.root_path, 'uploads')
+            if not os.path.exists(uploads_dir):
+                os.makedirs(uploads_dir)
+
+            file_path = os.path.join(uploads_dir, file.filename)
+            file.save(file_path)
+            import_excel_data(file_path)
+            flash('数据成功导入')
+            return redirect(url_for('index'))
+
+    return render_template('import.html')
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'xlsx'}
+
+
+def import_excel_data(file_path):
+    df = pd.read_excel(file_path, sheet_name=None)
+
+    if '库存列表' in df:
+        products_df = df['库存列表']
+
+        for _, row in products_df.iterrows():
+            product_id = row['产品ID']
+            product_name = row['产品名称']
+            product_specification = row['规格']
+            initial_stock = row['初始库存']
+            current_stock = row['当前库存']
+
+            product_id = str(product_id).strip()
+            product_name = str(product_name).strip()
+            product_specification = str(product_specification).strip()
+            initial_stock = int(initial_stock)
+            current_stock = int(current_stock)
+
+            product = Product.query.get(product_id)
+            if not product:
+                product = Product(
+                    id=product_id,
+                    name=product_name,
+                    specification=product_specification,
+                    initial_stock=initial_stock,
+                    current_stock=current_stock
+                )
+                db.session.add(product)
+            else:
+                product.name = product_name
+                product.specification = product_specification
+                product.current_stock = current_stock
+
+    db.session.commit()
