@@ -1,6 +1,6 @@
 /* 通用样式 */
 body {
-  background: linear-gradient(to right, #00B960, #00552C);
+  background: linear-gradient(to right, #EAEAEA 0%, #8B8B8B 100%);
   font-family: 'Arial', sans-serif;
   color: #333;
   margin: 0;
@@ -12,13 +12,13 @@ body {
   margin: auto;
   background-color: #ffffff;
   padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow:  0 3px 6px 0 rgba(1,4,9,0.8), 0 1px 1px 0 rgba(0,0,0,0.1);
   border-radius: 8px;
 }
 
 /* 标题样式 */
 h1, h2 {
-  color: #333333;
+  color: #333;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -46,7 +46,11 @@ h1, h2 {
 
 .form-control:focus {
   border-color: #80bdff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  box-shadow:  0 3px 6px 0 rgba(1,4,9,0.8), 0 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
 }
 
 .navbar-brand {
@@ -74,19 +78,25 @@ h1, h2 {
 
 /* 按钮样式 */
 .btn-danger, .btn-custom {
-  background-color: #309f3c;
-  border: none;
-  color: #fff;
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 4px;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s ease;
+    background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
+    border: none;
+    margin: 2px;
+    padding: 8px 12px;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow:  0 3px 6px 0 rgba(1,4,9,0.8), 0 1px 1px 0 rgba(0,0,0,0.1);
+    border-radius: 4px;
+    display: inline-block;
 }
 
 .btn-danger:hover, .btn-custom:hover {
-  background-color: #686868;
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* 表单样式 */
@@ -98,6 +108,7 @@ label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  color: #555;
 }
 
 input[type="text"],
@@ -114,6 +125,13 @@ input[type="submit"], .btn {
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 95%;
 }
 
 /* 列表样式 */
@@ -154,9 +172,9 @@ input[type="submit"], .btn {
   padding: 15px;
   border-radius: 5px;
   color: #ffffff;
-  background-color: #28a745;
-  border: 1px solid #28a745;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
+  border: 1px solid #black;
+  box-shadow:  0 3px 6px 0 rgba(1,4,9,0.8), 0 1px 1px 0 rgba(0,0,0,0.1);
   font-size: 16px;
 }
 
@@ -196,7 +214,7 @@ select {
 
 select:focus {
   border-color: #80bdff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  box-shadow:  0 3px 6px 0 rgba(1,4,9,0.8), 0 1px 1px 0 rgba(0,0,0,0.1);
 }
 
 /* 表格样式 */
@@ -223,15 +241,4 @@ select:focus {
 
 .custom-table tbody tr:hover {
   background-color: #f1f1f1;
-}
-
-.btn-sm {
-  height: 32.5px;
-  width: 48px;
-  padding: 1px 1px;
-  font-size: 1.2em;
-}
-
-.btn-black{
-  background-color: gray;
 }
