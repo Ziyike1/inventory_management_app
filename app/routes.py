@@ -80,17 +80,23 @@ def sale():
         product_id = request.form['product_id']
         name = request.form['sale_name']
         specification = request.form['specification']
-        quantity = request.form['quantity']
+        quantity = int(request.form['quantity'])
         date_str = request.form['date']
         date = datetime.strptime(date_str, '%Y-%m-%d').date()
         supplier = request.form.get('supplier', None)
         things = request.form['things']
         company = request.form['company']
+
+        product = Product.query.get(product_id)
+
+        if product.current_stock < quantity:
+            flash('库存不足，无法完成出库操作')
+            return redirect(url_for('sale'))
+
         sale = Sale(id=str(uuid.uuid4()), product_id=product_id, name=name, specification=specification,
                     quantity=quantity, date=date, supplier=supplier, things=things, company=company)
         db.session.add(sale)
 
-        product = Product.query.get(product_id)
         product.current_stock -= int(quantity)
 
         db.session.commit()
