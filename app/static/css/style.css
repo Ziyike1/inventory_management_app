@@ -173,7 +173,7 @@ input[type="file"] {
   border-radius: 5px;
   color: #ffffff;
   background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
-  border: 1px solid #black;
+  border: 1px solid black;
   box-shadow:  0 3px 6px 0 rgba(1,4,9,0.8), 0 1px 1px 0 rgba(0,0,0,0.1);
   font-size: 16px;
 }
