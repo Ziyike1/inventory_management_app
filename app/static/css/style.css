@@ -81,8 +81,8 @@ h1, h2 {
     background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
     border: none;
     margin: 2px;
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 7px 13px;
+    font-size: 15px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
@@ -222,12 +222,12 @@ select:focus {
   width: 100%;
   border-collapse: collapse;
   margin: 10px 0;
-  font-size: 1em;
-  text-align: left;
+  font-size: 0.9em;
+  text-align: center;
 }
 
 .custom-table th, .custom-table td {
-  padding: 12px 15px;
+  padding: 10px 6px;
   border: 1px solid #ddd;
 }
 
